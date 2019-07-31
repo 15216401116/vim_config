@@ -1,0 +1,111 @@
+set number
+set numberwidth=5
+set matchpairs+=<:>
+set hlsearch
+
+" Highlight current line
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
+" 定义快捷键的前缀，即<Leader>
+let mapleader=";"
+" 开启文件类型侦测
+filetype on
+" 根据侦测到的不同类型加载对应的插件
+filetype plugin on
+" 让配置变更立即生效
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" 开启实时搜索功能
+set incsearch
+" 搜索时大小写不敏感
+set ignorecase
+" 关闭兼容模式
+set nocompatible
+set backspace=2
+set ruler
+set showcmd
+set fileencodings=utf-8,bg18030,gbk,big5
+set tabstop=4
+set shiftwidth=2
+set shiftround
+set expandtab
+set list listchars=tab:»·,trail:·
+
+"set textwidth=80
+"set colorcolumn=+1
+
+" vim 自身命令行模式智能补全
+set wildmenu
+" vundle 环境设置
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'vim-scripts/phd'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'derekwyatt/vim-fswitch'
+Plugin 'kshenoy/vim-signature'
+Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/indexer.tar.gz'
+Plugin 'vim-scripts/DfrankUtil'
+Plugin 'vim-scripts/vimprj'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'vim-scripts/DrawIt'
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'derekwyatt/vim-protodef'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'gcmt/wildfire.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'lilydjwg/fcitx.vim'
+Plugin 'kien/ctrlp.vim'
+" 插件列表结束
+call vundle#end()
+filetype plugin indent on
+
+syntax enable
+set background=dark
+"colorscheme solarized
+colorscheme molokai
+
+set laststatus=2
+set t_Co=256
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
+"hi IndentGuidesOdd  ctermbg=black
+"hi IndentGuidesEven ctermbg=darkgrey
+"let g:indent_guides_enable_on_vim_startup = 1
+"
+" NERD tree
+let NERDChristmasTree=0
+let NERDTreeWinSize=35
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="left"
+" Automatically open a NERDTree if no files where specified
+autocmd vimenter * if !argc() | NERDTree | endif
+" Close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Open a NERDTree
+"map <F3> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
+" Tagbar
+let g:tagbar_width=35
+let g:tagbar_autofocus=1
+nmap <F4> :TagbarToggle<CR>
+
+let g:ctrlp_cmd = 'CtrlP'
